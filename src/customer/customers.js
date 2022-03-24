@@ -13,6 +13,18 @@ export const Customers = () => {
             setPerson(temp);
         }
     }
+    const editCustomer = (id) => {
+        // alert('ff')
+        console.log(id);
+        // const temp = person.filter(c => c.id == id);
+        const itemIndex=person.findIndex(c=>c.id==id);
+        console.log(itemIndex);
+        person[itemIndex].editMode=true;
+       console.log(person[itemIndex]);
+        
+        setPerson([...person]);
+        console.log(person);
+    }
     return (
         <div className='row'>
             {person.map((item) => (
@@ -22,7 +34,7 @@ export const Customers = () => {
                     <div key={item.id}>{item.editMode}</div>
                     :
                     <CustomerInfo person={item} key={item.id}
-                        remove={removeCustomer} />
+                        remove={removeCustomer} edit={editCustomer} />
             ))}
         </div>
     )
