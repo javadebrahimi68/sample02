@@ -26,6 +26,15 @@ export const Customers = () => {
         setPerson([...person]);
         console.log(person);
     }
+    const saveChange=(id,name,family)=>{
+        const itemIndex=person.findIndex(c=>c.id==id);
+      
+        person[itemIndex].name=name;
+        person[itemIndex].family=family;
+        person[itemIndex].editMode=false;
+        
+        setPerson([...person]);
+    }
     return (
         <div className='row'>
             {person.map((item) => (
@@ -33,7 +42,7 @@ export const Customers = () => {
 
 
                 <CustomerEdit person={item} key={item.id}
-                remove={removeCustomer} edit={editCustomer} />
+                save={saveChange} edit={editCustomer} />
                     :
                     <CustomerInfo person={item} key={item.id}
                         remove={removeCustomer} edit={editCustomer} />
