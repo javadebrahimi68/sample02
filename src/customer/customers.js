@@ -5,9 +5,12 @@ const initialPerson = [
     { id: 1, name: 'Javad', family: 'Ebrahimi', editMode: false },
     { id: 2, name: 'Reza', family: 'Ahmadi', editMode: false },
     { id: 3, name: 'Mahdi', family: 'Mouood', editMode: false }
-]
+];
+
 export const Customers = () => {
     const [person, setPerson] = React.useState(initialPerson);
+    
+const [rawPerson,setRawPerson] = [{ id: 100, name: '', family: '', editMode: false }];
     const removeCustomer = (id) => {
         const temp = person.filter(c => c.id != id);
         if (window.confirm('Are you Sure ?')) {
@@ -35,6 +38,15 @@ export const Customers = () => {
         
         setPerson([...person]);
     }
+     const addNewPerson=(id,name,family)=>{
+
+ rawPerson.id=id;
+ rawPerson.name=name;
+ rawPerson.family=family;
+ rawPerson.editMode=false;
+        
+       setPerson ([...person,rawPerson]);
+    }
     return (
         <div className='row'>
             {person.map((item) => (
@@ -47,6 +59,8 @@ export const Customers = () => {
                     <CustomerInfo person={item} key={item.id}
                         remove={removeCustomer} edit={editCustomer} />
             ))}
+              <CustomerEdit person={rawPerson} key={rawPerson.id}
+                save={addNewPerson}  />
         </div>
     )
 
