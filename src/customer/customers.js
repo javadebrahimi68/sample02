@@ -1,4 +1,5 @@
 import React from 'react';
+import { CustomerEdit } from './customerEdit';
 import { CustomerInfo } from './customerInfo';
 const initialPerson = [
     { id: 1, name: 'Javad', family: 'Ebrahimi', editMode: false },
@@ -13,13 +14,13 @@ export const Customers = () => {
             setPerson(temp);
         }
     }
-    const editCustomer = (id) => {
+    const editCustomer = (id,editMode=true) => {
         // alert('ff')
         console.log(id);
         // const temp = person.filter(c => c.id == id);
         const itemIndex=person.findIndex(c=>c.id==id);
         console.log(itemIndex);
-        person[itemIndex].editMode=true;
+        person[itemIndex].editMode=editMode;
        console.log(person[itemIndex]);
         
         setPerson([...person]);
@@ -31,7 +32,8 @@ export const Customers = () => {
                 item.editMode ?
 
 
-                    <div key={item.id}>{item.editMode}</div>
+                <CustomerEdit person={item} key={item.id}
+                remove={removeCustomer} edit={editCustomer} />
                     :
                     <CustomerInfo person={item} key={item.id}
                         remove={removeCustomer} edit={editCustomer} />
